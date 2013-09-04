@@ -1,0 +1,4 @@
+*.bib
+*.pdf
+*.pyc
+overlay_tmp.tex
