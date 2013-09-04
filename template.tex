@@ -1,0 +1,23 @@
+\documentclass[a4paper]{article}
+\usepackage[pdf]{pstricks}
+\usepackage{pst-barcode}
+\usepackage{wrapfig}
+\usepackage{bibentry}
+\nobibliography{BIBFILE}
+\usepackage[osf,sc]{mathpazo} % Palatino with real small caps and text figures
+
+\usepackage{textpos}
+\TPMargin{10mm}
+\begin{document}
+  \pagestyle{empty}
+  \begin{textblock}{14.5}(-2.5,11.6)
+    \textblockcolour{white}
+    \begin{wrapfigure}{o}{0.15\textwidth}
+      \vspace{-20pt}
+    \begin{pspicture}(0.9in,0.9in) \psbarcode{PDFURL}{eclevel=M width=0.9 height=0.9}{qrcode}
+    \end{pspicture}
+    \end{wrapfigure}
+    \noindent\bibentry{BIBKEY}
+  \end{textblock}%
+  \bibliographystyle{plainnat}  
+\end{document}
