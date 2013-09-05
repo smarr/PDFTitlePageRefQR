@@ -8,6 +8,8 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 
 bibfile_name = sys.argv[1]
 
+DIR = os.path.abspath(os.path.dirname(__file__))
+
 
 def load_bibtex(bibfile_name):
     with open(bibfile_name, 'r') as bibfile:
@@ -27,7 +29,7 @@ def download_pdf(bibentry, entry_name):
         return bibentry['pdf']
 
 def create_overlay(entry_name, url, bibfile_name):
-    with open('template.tex', 'r') as tex_template:
+    with open('%s/template.tex' % DIR, 'r') as tex_template:
         tpl = tex_template.read()
         tpl = tpl.replace("BIBKEY", entry_name)
         tpl = tpl.replace("PDFURL", url)
