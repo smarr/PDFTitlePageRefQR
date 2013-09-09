@@ -1,4 +1,5 @@
-\documentclass[a4paper]{article}
+\documentclass{article}%[a4paper]
+\usepackage[margin=0.5cm, paperwidth=PAPERWIDTH, paperheight=PAPERHEIGHT]{geometry}
 \usepackage[pdf]{pstricks}
 \usepackage{pst-barcode}
 \usepackage{wrapfig}
@@ -6,11 +7,12 @@
 \nobibliography{BIBFILE}
 \usepackage[osf,sc]{mathpazo} % Palatino with real small caps and text figures
 
-\usepackage{textpos}
+\usepackage[absolute]{textpos}
 \TPMargin{10mm}
+\setlength{\TPHorizModule}{\paperwidth}\setlength{\TPVertModule}{\paperheight}
 \begin{document}
   \pagestyle{empty}
-  \begin{textblock}{14.5}(-2.5,11.6)
+  \begin{textblock}{0.9}(0.05,0.85)
     \textblockcolour{white}
     \begin{wrapfigure}{o}{0.15\textwidth}
       \vspace{-20pt}

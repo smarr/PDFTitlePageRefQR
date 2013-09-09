@@ -29,11 +29,18 @@ def download_pdf(bibentry, entry_name):
         return bibentry['pdf']
 
 def create_overlay(entry_name, url, bibfile_name):
+    input1 = PdfFileReader(open("%s.original.pdf" % entry_name, "rb"))
+    page1  = input1.getPage(0)
+    width  = page1.mediaBox.getUpperRight_x()
+    height = page1.mediaBox.getUpperRight_y()
+    
     with open('%s/template.tex' % DIR, 'r') as tex_template:
         tpl = tex_template.read()
         tpl = tpl.replace("BIBKEY", entry_name)
         tpl = tpl.replace("PDFURL", url)
         tpl = tpl.replace("BIBFILE", bibfile_name)
+        tpl = tpl.replace("PAPERWIDTH",  "%dpt" % width)
+        tpl = tpl.replace("PAPERHEIGHT", "%dpt" % height)
         
         with open("overlay_tmp.tex", "w") as tex_file:
             tex_file.write(tpl)
@@ -54,8 +61,9 @@ def create_overlayed_page(entry_name):
     watermark = PdfFileReader(open("overlay_tmp.pdf", "rb"))
 
     page1 = input1.getPage(0)
-
-    page1.mergePage(watermark.getPage(0))
+    page1_watermark = watermark.getPage(0)
+    
+    page1.mergePage(page1_watermark)
     output.addPage(page1)
 
     outputStream = file("%s.with-ref.pdf" % entry_name, "wb")
